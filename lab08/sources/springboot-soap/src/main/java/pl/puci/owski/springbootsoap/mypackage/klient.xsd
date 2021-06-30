@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://pucilowski.pl/soap-example"
+           targetNamespace="http://pucilowski.pl/soap-example"
+>
+
+    <xs:element name="getKlient">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="klient" type="tns:klient"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="klient">
+        <xs:sequence>
+            <xs:element name="id" type="xs:int"/>
+            <xs:element name="FirstName" type="xs:string"/>
+            <xs:element name="LastName" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?language javascript?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.collections.FXCollections?>
+
+<VBox fx:id="vbox" layoutX="0.0" layoutY="0.0" prefHeight="400.0"
+      prefWidth="400.0" spacing="0" xmlns:fx="http://javafx.com/fxml/1"
+      xmlns="http://javafx.com/javafx/2.2">
+        <fx:script>
+            var packages = new JavaImporter(java.nio.file.Path, java.nio.file.Files, java.lang.String, java.lang.StringBuilder, java.util.stream.Stream, java.nio.charset.StandardCharsets);
+            var wishesMap = [
+                'bwishes1.txt',
+                'bwishes2.txt',
+                'bwishes3.txt'
+            ];
+
+            function buttonAction(event) {
+                if (option.getValue() === "random") {
+                    var prefix;
+                    if(specification.getValue() === "Birthday"){
+                        prefix='b';
+                    }
+                    if(specification.getValue() === "Christmas"){
+                        prefix='c';
+                    }
+                    if(specification.getValue() === "St. Patrick’s Day"){
+                        prefix='s';
+                    }
+                    var id = Math.floor((Math.random() * 3) + 1);
+                    with (packages) {
+                        var path = Path.of("C:\\Users\\Krzysztof\\Documents\\JavaFX_13\\src\\sample\\"+prefix+"wishes" + id + ".txt");
+
+                        text = Files.readString(path);
+                        outputText.setText(text.replace("name", name.getText()));
+                    }
+                }
+
+
+                if (option.getValue() === "shortest") {
+                    var prefix;
+                    if(specification.getValue() === "Birthday"){
+                        prefix='b';
+                    }
+                    if(specification.getValue() === "Christmas"){
+                        prefix='c';
+                    }
+                    if(specification.getValue() === "St. Patrick’s Day"){
+                        prefix='s';
+                    }
+                    with (packages) {
+
+                        var path = Path.of("C:\\Users\\Krzysztof\\Documents\\JavaFX_13\\src\\sample\\"+prefix+"wishes1.txt");
+                        text = Files.readString(path);
+
+                        outputText.setText(text.replace("name", name.getText()));
+
+                    }
+                }
+
+                if (option.getValue() === "longest") {
+                    var prefix;
+                    if(specification.getValue() === "Birthday"){
+                        prefix='b';
+                    }
+                    if(specification.getValue() === "Christmas"){
+                        prefix='c';
+                    }
+                    if(specification.getValue() === "St. Patrick’s Day"){
+                        prefix='s';
+                    }
+                    with (packages) {
+
+                        var path = Path.of("C:\\Users\\Krzysztof\\Documents\\JavaFX_13\\src\\sample\\"+prefix+"wishes3.txt");
+                        text = Files.readString(path);
+
+                        outputText.setText(text.replace("name", name.getText()));
+
+                    }
+                }
+            }
+            function darkMode(event){
+                vbox.getStylesheets().add("sample/application.css");
+            }
+            function whiteMode(event){
+                vbox.getStylesheets().add("sample/application1.css");
+            }
+        </fx:script>
+         <children>
+             <Label layoutX="31.0" layoutY="21.0" text="Name:" />
+            <TextField fx:id="name" layoutX="77.0" layoutY="16.0" />
+            <ComboBox fx:id="option" layoutX="273.0" layoutY="16.0" prefWidth="150.0" promptText="choose type">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="random"/>
+                        <String fx:value="longest"/>
+                        <String fx:value="shortest"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+            <ComboBox fx:id="specification" layoutX="434.0" layoutY="16.0" prefWidth="150.0" promptText="choose occasion">
+             <items>
+                 <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="Birthday"/>
+                     <String fx:value="St. Patrick’s Day"/>
+                     <String fx:value="Christmas"/>
+                 </FXCollections>
+             </items>
+            </ComboBox>
+            <Button layoutX="316.0" layoutY="57.0" mnemonicParsing="false" onAction="buttonAction(event);" text="Load" />
+            <Label layoutX="30.0" layoutY="88.0" text="Wishes:" />
+            <TextArea fx:id="outputText" layoutX="30.0" layoutY="128.0" prefHeight="200.0" prefWidth="537.0" />
+             <Button layoutX="316.0" layoutY="57.0" mnemonicParsing="false" onAction="darkMode(event);" text="Dark Mode" />
+             <Button layoutX="316.0" layoutY="57.0" mnemonicParsing="false" onAction="whiteMode(event);" text="White Mode" />
+         </children>
+</VBox>
+
+
+
+
